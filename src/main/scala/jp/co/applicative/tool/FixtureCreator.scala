@@ -41,13 +41,13 @@ object FixtureCreator {
     YamlHelper.dump(convertJavaMap(map))
   }
 
-  def rowProc(header: HSSFRow, row: HSSFRow): LinkedHashMap[String, Any] = {
-    val map = LinkedHashMap.empty[String, Any]
+  def rowProc(header: HSSFRow, row: HSSFRow): LinkedHashMap[String, String] = {
+    val map = LinkedHashMap.empty[String, String]
     val itr = header.cellIterator()
     while (itr.hasNext()) {
       val key = itr.next().asInstanceOf[HSSFCell]
-      val value = PoiHelper.getCellValue(row.getCell(key.getCellNum())).toString
-      PoiHelper.getCellValue(key).toString match {
+      val value = PoiHelper.getCellValue(row.getCell(key.getCellNum()))
+      PoiHelper.getCellValue(key) match {
         case k if (!k.endsWith("$")) => map += (k -> value)
         case k if (value.lines.length > 1) => map += (k.substring(0, k.length() - 1) -> value)
         case k => map += (k.substring(0, k.length() - 1) -> escape(value))

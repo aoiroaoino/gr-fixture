@@ -8,7 +8,7 @@ import org.apache.poi.ss.usermodel.DateUtil
 
 object PoiHelper {
 
-  def getCellValue(cell: HSSFCell): Any = {
+  def getCellValue(cell: HSSFCell): String = {
     if (cell == null) return ""
     cell.getCellType() match {
       case Cell.CELL_TYPE_BLANK => ""
@@ -29,5 +29,5 @@ object PoiHelper {
       }
       case _ => ""
     }
-  }
+  }.toString
 }
