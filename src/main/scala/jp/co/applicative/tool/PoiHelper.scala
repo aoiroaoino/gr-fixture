@@ -18,7 +18,7 @@ object PoiHelper {
         cell match {
           case c if DateUtil.isCellDateFormatted(c) => c.getDateCellValue()
           case c => c.getNumericCellValue() match {
-            case v if v == v.intValue => v.intValue
+            case v if v == v.intValue => v.intValue.toString // Double にされる前に文字列化
             case v => v
           }
         }
