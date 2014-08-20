@@ -19,6 +19,7 @@ object FixtureCreator {
     for (i <- 0 until wb.getNumberOfSheets()) {
       val sheetName = wb.getSheetName(i)
       writeFixture(sheetProc(wb.getSheetAt(i), sheetName), outPath, sheetName + ".yml")
+      writeFixture(SQLHelper.sheetProc(wb.getSheetAt(i), sheetName), outPath, sheetName + ".sql")
     }
   }
 
